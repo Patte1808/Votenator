@@ -1,16 +1,15 @@
-import { extendObservable } from 'mobx';
+import { extendObservable, action } from 'mobx';
 
 export class Poll {
   constructor() {
     extendObservable(this, {
       id: null,
       title: '',
-      questions: [{id: 0, title: ''}, {id: 1, title: ''}, {id: 2, title: ''}]
+      questions: [{id: 0, title: ''}, {id: 1, title: ''}, {id: 2, title: ''}],
+      addQuestion: action(function(question) {
+        this.questions.push(question);
+      })
     });
-  }
-
-  addQuestion(question) {
-    this.questions.push(question);
   }
 
   toJson() {
@@ -44,11 +43,10 @@ export class PollStore {
     mPoll.addQuestion({id:2, title:'Muh'});
 
     extendObservable(this, {
-      polls: [mPoll]
+      polls: [mPoll],
+      addPoll: action(function(poll) {
+        this.polls.push(poll);
+      })
     });
-  }
-
-  addPoll(poll) {
-    this.polls.push(poll);
   }
 }
