@@ -7,7 +7,7 @@ import {RadioButton} from 'material-ui/RadioButton';
 import {RadioButtonGroup} from 'material-ui/RadioButton';
 
 const style = {
-  margin: 12
+  marginTop: 12
 };
 
 function PollForm({store, poll}) {
@@ -32,8 +32,7 @@ function PollForm({store, poll}) {
     let id = store.polls.length;
     poll.id = id;
 
-    console.log(poll.questions.peek());
-    console.log(poll.toJson());
+    store.addPoll(poll);
   }
 
   return (
@@ -48,7 +47,7 @@ function PollForm({store, poll}) {
               <br/>
             </div>
           )}
-          <RaisedButton label="Create Poll" primary={true} onClick={onSavePoll} />
+          <RaisedButton label="Create Poll" primary={true} onClick={onSavePoll} style={style} />
         </CardText>
       </Card>
     </div>

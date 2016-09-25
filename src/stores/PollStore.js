@@ -34,9 +34,21 @@ export class Poll {
 }
 
 export class PollStore {
+
   constructor() {
+    let mPoll = new Poll();
+    mPoll.title = 'Test';
+    mPoll.id = 0;
+    mPoll.questions = [];
+    mPoll.addQuestion({id: 1, title: 'Test123'});
+    mPoll.addQuestion({id:2, title:'Muh'});
+
     extendObservable(this, {
-      polls: []
+      polls: [mPoll]
     });
+  }
+
+  addPoll(poll) {
+    this.polls.push(poll);
   }
 }

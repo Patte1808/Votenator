@@ -6,7 +6,9 @@ const style = {
   margin: 12
 };
 
-function App({store, poll}) {
+function App({route}) {
+
+  const {store, poll} = route;
 
   return (
     <PollForm store={store} poll={poll} />

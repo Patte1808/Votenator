@@ -6,7 +6,12 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {RadioButton} from 'material-ui/RadioButton';
 import {RadioButtonGroup} from 'material-ui/RadioButton';
 
-function Poll({store}) {
+function PollShow({route, params}) {
+
+  const {store} = route;
+  console.log(params);
+  console.log(store.polls.peek());
+  const poll = store.polls[params.pollId];
 
   return (
     <div>
@@ -18,10 +23,11 @@ function Poll({store}) {
               <RadioButton value={question.id} label={question.title} key={key} />
             )}
           </RadioButtonGroup>
+          <RaisedButton label="Vote" primary={true} />
         </CardText>
       </Card>
     </div>
   );
 };
 
-export default observer(Poll);
+export default observer(PollShow);
