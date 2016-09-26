@@ -30,22 +30,29 @@ export class Poll {
 
     return `{id: ${this.id}, title: '${this.title}', ${questions}}`;
   }
+
+  serialize() {
+    let questions = [];
+
+    for(let i = 0; i < this.questions.length; i++) {
+      if(this.questions[i].title !== '')
+        questions.push(this.questions[i]);
+    }
+
+    this.questions = questions;
+
+    return this;
+  }
 }
 
 export class PollStore {
 
   constructor() {
-    let mPoll = new Poll();
-    mPoll.title = 'Test';
-    mPoll.id = 0;
-    mPoll.questions = [];
-    mPoll.addQuestion({id: 1, title: 'Test123'});
-    mPoll.addQuestion({id:2, title:'Muh'});
 
     extendObservable(this, {
-      polls: [mPoll],
+      polls: [],
       addPoll: action(function(poll) {
-        this.polls.push(poll);
+        this.polls.push(poll.serialize());
       })
     });
   }

@@ -6,11 +6,15 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {RadioButton} from 'material-ui/RadioButton';
 import {RadioButtonGroup} from 'material-ui/RadioButton';
 
+import {Router} from 'react-router';
+
+import {browserHistory} from 'react-router';
+
 const style = {
   marginTop: 12
 };
 
-function PollForm({store, poll}) {
+function PollForm({store, poll, context}) {
 
   function onKeyUp(e) {
     let id = parseInt(e.target.id);
@@ -32,7 +36,8 @@ function PollForm({store, poll}) {
     let id = store.polls.length;
     poll.id = id;
 
-    store.addPoll(poll);
+    store.addPoll(poll.serialize());
+    browserHistory.push(`/polls/${poll.id}`);
   }
 
   return (
@@ -47,7 +52,7 @@ function PollForm({store, poll}) {
               <br/>
             </div>
           )}
-          <RaisedButton label="Create Poll" primary={true} onClick={onSavePoll} style={style} />
+          <RaisedButton label="Create Poll" primary={true} style={style} onClick={onSavePoll} />
         </CardText>
       </Card>
     </div>

@@ -19,7 +19,7 @@ ReactDOM.render(
   <MuiThemeProvider>
     <Router history={browserHistory}>
       <Route path="/" component={App} store={pollStore} poll={poll} />
-      <Route path=":pollId" component={PollShow} store={pollStore} />
+      <Route name="pollDetail" path="/polls/:pollId" component={PollShow} store={pollStore} />
     </Router>
   </MuiThemeProvider>,
   document.getElementById('root')
