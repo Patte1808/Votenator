@@ -8,6 +8,18 @@ export class Poll {
       questions: [{id: 0, title: ''}, {id: 1, title: ''}, {id: 2, title: ''}],
       addQuestion: action(function(question) {
         this.questions.push(question);
+      }),
+      serialize: action(function() {
+        let questions = [];
+
+        for(let i = 0; i < this.questions.length; i++) {
+          if(this.questions[i].title !== '')
+            questions.push(this.questions[i]);
+        }
+
+        this.questions = questions;
+
+        return this;
       })
     });
   }
@@ -29,19 +41,6 @@ export class Poll {
     questions += ']';
 
     return `{id: ${this.id}, title: '${this.title}', ${questions}}`;
-  }
-
-  serialize() {
-    let questions = [];
-
-    for(let i = 0; i < this.questions.length; i++) {
-      if(this.questions[i].title !== '')
-        questions.push(this.questions[i]);
-    }
-
-    this.questions = questions;
-
-    return this;
   }
 }
 
